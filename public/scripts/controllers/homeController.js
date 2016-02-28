@@ -1,33 +1,40 @@
-//myApp.controller('PeopleController', ['$scope', 'DataFactory', function($scope, DataFactory) {
-//    console.log('People Controller');
-//
-//    $scope.people = [];
-//    $scope.dataFactory = DataFactory;
-//    $scope.message = 'People!';
-//    $scope.formName = '';
-//
-//    if($scope.dataFactory.peopleData() === undefined) {
-//        // initial load
-//        $scope.dataFactory.retrieveData().then(function() {
-//            $scope.people = $scope.dataFactory.peopleData();
-//        });
-//    } else {
-//        $scope.people = $scope.dataFactory.peopleData();
-//    }
-//
-//    $scope.addPerson = function() {
-//        $scope.dataFactory.addName($scope.formName);
-//        $scope.formName = '';
-//    }
-//
-//}]);
 myApp.controller('HomeController', ['$scope', '$http', function($scope, $http) {
     $scope.data = {};
+    $scope.animal = {};
+    //$scope.dataFactory = DataFactory;
+    //$scope.animalForm = {};
+
+    //if($scope.dataFactory.animalData() === undefined) {
+    //   // initial load
+    //    $scope.dataFactory.pushData().then(function() {
+    //        $scope.people = $scope.dataFactory.animalData();
+    //    });
+    //} else {
+    //    $scope.people = $scope.dataFactory.animalData();
+    //}
+    //
+    //$scope.chooseAnimal = function() {
+    //    $scope.dataFactory.addInfo($scope.animalForm);
+    //    $scope.animalForm = '';
+    //}
 
     $scope.chooseAnimal = function() {
         var selectedAnimal = $scope.animal;
         petFinder(selectedAnimal);
     };
+
+    $scope.favorite = function() {
+        var animal = $scope.animal;
+        //console.log(animal);
+
+        postFavorite(animal);
+
+        function postFavorite(data) {
+            $http.post('/data', data).then(function(response){
+                console.log('posting');
+            });
+        };
+    }
 
     function petFinder(data) {
         // API key

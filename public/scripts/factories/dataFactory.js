@@ -1,32 +1,32 @@
 myApp.factory('DataFactory', ['$http', function($http) {
     // PRIVATE
-    var people = undefined;
+    var animals = undefined;
 
-    var getData = function() {
-        console.log('getting data from server');
-        var promise = $http.get('/data').then(function(response) {
-            people = response.data;
-            console.log('Async data response:', people);
+    var postData = function() {
+        console.log('posting data to database');
+        var promise = $http.post('/data').then(function(response) {
+            animals = response.data;
+            console.log('Async data response:', animals);
         });
 
         return promise;
     };
 
-    var addPerson = function(name) {
-        people.push(name);
+    var chooseAnimal = function(selectedAnimal) {
+        animals.push(selectedAnimal);
     };
 
 
     //PUBLIC
     var publicApi = {
-        peopleData: function() {
-            return people;
+        animalData: function() {
+            return animals;
         },
-        retrieveData: function() {
-            return getData();
+        pushData: function() {
+            return postData();
         },
-        addName: function(name) {
-            addPerson(name);
+        addInfo: function(selectedAnimal) {
+            chooseAnimal(selectedAnimal);
         }
     };
 

@@ -1,0 +1,8 @@
+CREATE TABLE animal
+    (
+        id SERIAL NOT NULL,
+        pet_name character varying(255) NOT NULL,
+        pet_image_url character varying(255) NOT NULL,
+        pet_description varchar(100) NOT NULL,
+        CONSTRAINT petfinder_pkey PRIMARY KEY (id)
+    );
