@@ -1,0 +1,16 @@
+<li><a href="#home">Return to Animals</a></li>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <h2>{{message}}</h2>
+        <p>Fave Count: {{favorites.length}}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div ng-repeat="person in people">
+            <p>{{person}}</p>
+        </div>
+    </div>
+</div>
