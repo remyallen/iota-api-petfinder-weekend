@@ -9,8 +9,10 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <div ng-repeat="person in people">
-            <p>{{person}}</p>
+        <div ng-repeat="animal in favoriteAnimals">
+            <p>{{animal.pet_name}}</p>
+            <img src="{{animal.pet_image_url}}"/>
+            <p>{{animal.pet_description}}</p>
         </div>
     </div>
 </div>

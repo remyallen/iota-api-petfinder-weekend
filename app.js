@@ -58,6 +58,24 @@ app.post('/data', function(req, res) {
     });
 });
 
+app.get('/data', function(req, res) {
+    var results = [];
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM animal;');
+
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        query.on('end', function() {
+            client.end();
+            return res.json(results);
+        });
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
 
 
 // Serve back static files
