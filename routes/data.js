@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
-//var connect = require('../modules/connection');
+var connect = require('../modules/connection');
 
 
-router.post('/data', function(req, res) {
-    console.log(req);
+router.post('/', function(req, res) {
+    //console.log(req.body);
 
     var addData = {
         pet_name: req.body.name.$t,
@@ -15,7 +15,7 @@ router.post('/data', function(req, res) {
 
     pg.connect(connect, function(err, client, done) {
 
-        client.query('INSERT INTO petfinder (pet_name, pet_image_url, pet_description) VALUES ($1, $2, $3)',
+        client.query('INSERT INTO animal (pet_name, pet_image_url, pet_description) VALUES ($1, $2, $3)',
             [addData.pet_name, addData.pet_image_url, addData.pet_description],
 
         function (err, result){
@@ -46,5 +46,22 @@ router.post('/data', function(req, res) {
     });
 });
 
+router.get('/', function(req, res) {
+    var results = [];
+    pg.connect(connect, function(err, client, done) {
+        var query = client.query('SELECT * FROM animal;');
+
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        query.on('end', function() {
+            client.end();
+            return res.json(results);
+        });
+        if(err) {
+            console.log(err);
+        }
+    });
+});
 
 module.exports = router;
