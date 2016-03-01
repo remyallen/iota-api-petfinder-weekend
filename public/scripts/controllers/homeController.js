@@ -1,8 +1,7 @@
-myApp.controller('HomeController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('HomeController', ['$scope', 'DataFactory', "$http", function($scope, DataFactory, $http) {
     $scope.data = {};
     $scope.animal = {};
-    //$scope.dataFactory = DataFactory;
-    //$scope.animalForm = {};
+    $scope.dataFactory = DataFactory;
 
     //if($scope.dataFactory.animalData() === undefined) {
     //   // initial load

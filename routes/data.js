@@ -27,22 +27,7 @@ router.post('/', function(req, res) {
                 res.send(result);
             }
         });
-        //var query = client.query('SELECT * FROM petfinder');
 
-        // Stream results back one row at a time
-        //query.on('row', function(row) {
-        //    results.push(row);
-        //});
-        //
-        //// close connection
-        //query.on('end', function() {
-        //    done();
-        //    return res.json(results);
-        //});
-        //
-        //if(err) {
-        //    console.log(err);
-        //}
     });
 });
 
@@ -51,9 +36,11 @@ router.get('/', function(req, res) {
     pg.connect(connect, function(err, client, done) {
         var query = client.query('SELECT * FROM animal;');
 
+        // Stream results back one row at a time
         query.on('row', function(row) {
             results.push(row);
         });
+        // close connection
         query.on('end', function() {
             client.end();
             return res.json(results);
